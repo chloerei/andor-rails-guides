@@ -25,8 +25,9 @@ Dir['export/md/*.md'].each do |file|
     lines = []
 
     if head = doc.at_css('thead tr')
-      lines << ['|', head.css('th').map{|th| " #{th.content} "}.join('|'), '|'].join
-      lines << '-' * lines.first.length
+      titles = head.css('th').map{|th| " #{th.content} "}
+      lines << ['|', titles.join('|'), '|'].join
+      lines << ['|', titles.map{|title| '-' * title.length }.join('|'), '|'].join
     end
 
     doc.css('tbody tr').each do |tr|
